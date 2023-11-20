@@ -4,13 +4,13 @@
   --------------------------------------------------------------------------------------
 */
 const getList = async () => {
-  let url = 'http://127.0.0.1:5000/produtos';
+  let url = 'http://127.0.0.1:5000/tecnicas';
   fetch(url, {
     method: 'get',
   })
     .then((response) => response.json())
     .then((data) => {
-      data.produtos.forEach(item => insertList(item.nome, item.quantidade, item.valor))
+      data.tecnicas.forEach(item => insertList(item.nome, item.descricao, item.nivel, item.video))
     })
     .catch((error) => {
       console.error('Error:', error);
@@ -30,13 +30,14 @@ getList()
   Função para colocar um item na lista do servidor via requisição POST
   --------------------------------------------------------------------------------------
 */
-const postItem = async (inputProduct, inputQuantity, inputPrice) => {
+const postItem = async (inputTecnica, inputDescricao, inputNivel, inputVideo) => {
   const formData = new FormData();
-  formData.append('nome', inputProduct);
-  formData.append('quantidade', inputQuantity);
-  formData.append('valor', inputPrice);
+  formData.append('nome', inputTecnica);
+  formData.append('descricao', inputDescricao);
+  formData.append('nivel', inputNivel);
+  formData.append('video', inputVideo);
 
-  let url = 'http://127.0.0.1:5000/produto';
+  let url = 'http://127.0.0.1:5000/tecnica';
   fetch(url, {
     method: 'post',
     body: formData
@@ -91,7 +92,7 @@ const removeElement = () => {
 */
 const deleteItem = (item) => {
   console.log(item)
-  let url = 'http://127.0.0.1:5000/produto?nome=' + item;
+  let url = 'http://127.0.0.1:5000/tecnica?nome=' + item;
   fetch(url, {
     method: 'delete'
   })
@@ -107,18 +108,17 @@ const deleteItem = (item) => {
   --------------------------------------------------------------------------------------
 */
 const newItem = () => {
-  let inputProduct = document.getElementById("newInput").value;
-  let inputQuantity = document.getElementById("newQuantity").value;
-  let inputPrice = document.getElementById("newPrice").value;
+  let inputTecnica = document.getElementById("newTecnica").value;
+  let inputDescricao = document.getElementById("newDescricao").value;
+  let inputNivel = document.getElementById("newNivel").value;
+  let inputVideo = document.getElementById("newVideo").value;
 
-  if (inputProduct === '') {
-    alert("Escreva o nome de um item!");
-  } else if (isNaN(inputQuantity) || isNaN(inputPrice)) {
-    alert("Quantidade e valor precisam ser números!");
+  if (inputTecnica === '') {
+    alert("Escreva o nome de uma tecnica!");
   } else {
-    insertList(inputProduct, inputQuantity, inputPrice)
-    postItem(inputProduct, inputQuantity, inputPrice)
-    alert("Item adicionado!")
+    insertList(inputTecnica, inputDescricao, inputNivel, inputVideo)
+    postItem(inputTecnica, inputDescricao, inputNivel, inputVideo)
+    alert("Tecnica adicionada!")
   }
 }
 
@@ -127,8 +127,8 @@ const newItem = () => {
   Função para inserir items na lista apresentada
   --------------------------------------------------------------------------------------
 */
-const insertList = (nameProduct, quantity, price) => {
-  var item = [nameProduct, quantity, price]
+const insertList = (nomeTecnica, descricao, nivel, video) => {
+  var item = [nomeTecnica, descricao, nivel, video]
   var table = document.getElementById('myTable');
   var row = table.insertRow();
 
@@ -137,9 +137,10 @@ const insertList = (nameProduct, quantity, price) => {
     cel.textContent = item[i];
   }
   insertButton(row.insertCell(-1))
-  document.getElementById("newInput").value = "";
-  document.getElementById("newQuantity").value = "";
-  document.getElementById("newPrice").value = "";
+  document.getElementById("newTecnica").value = "";
+  document.getElementById("newDescricao").value = "";
+  document.getElementById("newNivel").value = "";
+  document.getElementById("newVideo").value = "";
 
   removeElement()
 }

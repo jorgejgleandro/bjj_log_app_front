@@ -33,6 +33,7 @@ header {
 .banner img {
     margin: 0px 0px 0px 0px;
     width: 100%;
+    background-repeat: repeat-y;
 }
 
 .newItem {
@@ -115,16 +116,16 @@ td {
     text-align: start;
 }
 
-table{
+table {
     background-color: white;
     width: 50%;
 }
 
-tr:nth-child(odd){
+tr:nth-child(odd) {
     background-color: #eee;
 }
 
-th:nth-child(1){
+th:nth-child(1) {
     width: 80%;
 }
 
@@ -132,3 +133,7 @@ tr:hover {
     background: rgb(200, 199, 199);
 }
 
+p {
+    font-size: 22px;
+    text-align: center;
+}
