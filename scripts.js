@@ -10,7 +10,7 @@ const getList = async () => {
   })
     .then((response) => response.json())
     .then((data) => {
-      data.tecnicas.forEach(item => insertList(item.nome, item.descricao, item.nivel, item.video))
+      data.tecnicas.forEach(item => insertList(item.nome, item.descricao, item.nivel, item.papel, item.video))
     })
     .catch((error) => {
       console.error('Error:', error);
@@ -30,11 +30,12 @@ getList()
   Função para colocar um item na lista do servidor via requisição POST
   --------------------------------------------------------------------------------------
 */
-const postItem = async (inputTecnica, inputDescricao, inputNivel, inputVideo) => {
+const postItem = async (inputTecnica, inputDescricao, inputNivel, inputPapel, inputVideo) => {
   const formData = new FormData();
   formData.append('nome', inputTecnica);
   formData.append('descricao', inputDescricao);
   formData.append('nivel', inputNivel);
+  formData.append('papel', inputPapel);
   formData.append('video', inputVideo);
 
   let url = 'http://127.0.0.1:5000/tecnica';
@@ -111,13 +112,14 @@ const newItem = () => {
   let inputTecnica = document.getElementById("newTecnica").value;
   let inputDescricao = document.getElementById("newDescricao").value;
   let inputNivel = document.getElementById("newNivel").value;
+  let inputPapel = document.getElementById("newPapel").value;
   let inputVideo = document.getElementById("newVideo").value;
 
   if (inputTecnica === '') {
     alert("Escreva o nome de uma tecnica!");
   } else {
-    insertList(inputTecnica, inputDescricao, inputNivel, inputVideo)
-    postItem(inputTecnica, inputDescricao, inputNivel, inputVideo)
+    insertList(inputTecnica, inputDescricao, inputNivel, inputPapel, inputVideo)
+    postItem(inputTecnica, inputDescricao, inputNivel, inputPapel, inputVideo)
     alert("Tecnica adicionada!")
   }
 }
@@ -127,8 +129,8 @@ const newItem = () => {
   Função para inserir items na lista apresentada
   --------------------------------------------------------------------------------------
 */
-const insertList = (nomeTecnica, descricao, nivel, video) => {
-  var item = [nomeTecnica, descricao, nivel, video]
+const insertList = (nomeTecnica, descricao, nivel, papel, video) => {
+  var item = [nomeTecnica, descricao, nivel, papel, video]
   var table = document.getElementById('myTable');
   var row = table.insertRow();
 
@@ -140,6 +142,7 @@ const insertList = (nomeTecnica, descricao, nivel, video) => {
   document.getElementById("newTecnica").value = "";
   document.getElementById("newDescricao").value = "";
   document.getElementById("newNivel").value = "";
+  document.getElementById("newPapel").value = "";
   document.getElementById("newVideo").value = "";
 
   removeElement()
