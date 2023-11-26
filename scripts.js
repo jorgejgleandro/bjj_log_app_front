@@ -31,12 +31,25 @@ getList()
   --------------------------------------------------------------------------------------
 */
 const postItem = async (inputTecnica, inputDescricao, inputNivel, inputPapel, inputVideo) => {
+  console.log(`POSTITEM`);
+  console.log(`inputTecnica: ${inputTecnica}`);
+  console.log(`inputDescricao: ${inputDescricao}`);
+  console.log(`inputNivel: ${inputNivel}`);
+  console.log(`inputPapel: ${inputPapel}`);
+  console.log(`inputVideo: ${inputVideo}`);
+
+
   const formData = new FormData();
   formData.append('nome', inputTecnica);
   formData.append('descricao', inputDescricao);
   formData.append('nivel', inputNivel);
   formData.append('papel', inputPapel);
   formData.append('video', inputVideo);
+
+  // List key/value pairs
+  for (let [name, value] of formData) {
+    console.log(`${name} = ${value}`); // key1 = value1, then key2 = value2
+  }
 
   let url = 'http://127.0.0.1:5000/tecnica';
   fetch(url, {
@@ -88,7 +101,7 @@ const removeElement = () => {
 
 /*
   --------------------------------------------------------------------------------------
-  Função para deletar um item da lista do servidor via requisição DELETE
+  Função para remover um item da lista do servidor via requisição DELETE
   --------------------------------------------------------------------------------------
 */
 const deleteItem = (item) => {
@@ -105,7 +118,7 @@ const deleteItem = (item) => {
 
 /*
   --------------------------------------------------------------------------------------
-  Função para adicionar um novo item com nome, quantidade e valor 
+  Função para adicionar um novo item com nome, descricao, nivel, papel e video 
   --------------------------------------------------------------------------------------
 */
 const newItem = () => {
@@ -114,6 +127,14 @@ const newItem = () => {
   let inputNivel = document.getElementById("newNivel").value;
   let inputPapel = document.getElementById("newPapel").value;
   let inputVideo = document.getElementById("newVideo").value;
+
+  console.log(`NEWITEM`);
+  console.log(`inputTecnica: ${inputTecnica}`);
+  console.log(`inputDescricao: ${inputDescricao}`);
+  console.log(`inputNivel: ${inputNivel}`);
+  console.log(`inputPapel: ${inputPapel}`);
+  console.log(`inputVideo: ${inputVideo}`);
+
 
   if (inputTecnica === '') {
     alert("Escreva o nome de uma tecnica!");

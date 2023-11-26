@@ -5,11 +5,11 @@ li {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    background-color: rgb(225, 222, 199);
+    background-color: rgb(118, 149, 168);
 }
 
 header {
-    background-color: rgb(225, 222, 199);
+    background-color: rgb(118, 149, 168);
     text-align: center;
     position: relative;
     width: 100%;
@@ -18,7 +18,7 @@ header {
 .title {
     color: white;
     width: 100%;
-    background-color: rgb(35, 32, 24);
+    background-color: rgb(24, 24, 122);
     display: inline-block;
     padding: 2px 0px;
     position: sticky;
@@ -37,7 +37,7 @@ header {
 }
 
 .newItem {
-    background-color: rgb(225, 222, 199);
+    background-color: rgb(118, 149, 168);
     padding: 30px 40px;
     color: white;
     display: flex;
@@ -136,4 +136,5 @@ tr:hover {
 p {
     font-size: 22px;
     text-align: center;
+    color: rgb(24, 24, 122); 
 }
