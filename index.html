@@ -17,9 +17,7 @@
         <div class="title">
             <h2>Técnicas Aprendidas de Brazilian Jiu-Jitsu</h2>
         </div>
-        <div class="banner">
-            <img src="./img/positions.jpg" alt="y">
-        </div>
+        <div class="banner"></div>
     </header>
 
     <!-- Opções para adicionar um novo item -->
@@ -27,9 +25,12 @@
     <section class="newItem">
         <input type="text" id="newTecnica" placeholder="Adicionar nova tecnica:">
         <input type="text" id="newDescricao" placeholder="Descricao:">
-        <input type="radio" name="newNivel" value="Iniciante">Iniciante
-        <input type="radio" name="newNivel" value="Intermediário">Intermediário
-        <input type="radio" name="newNivel" value="Avançado">Avançado
+        <input type="radio" id="iniciante" name="newNivel" value="Iniciante">
+        <label for="iniciante">Iniciante</label>
+        <input type="radio" id="intermediario" name="newNivel" value="Intermediário">
+        <label for="intermediario">Intermediário</label>
+        <input type="radio" id="avancado" name="newNivel" value="Avançado">
+        <label for="avancado">Avançado</label>
         <input type="text" id="newVideo" placeholder="Video:">
         <span onclick="newItem()" class="addBtn">Adicionar</span>
     </section>

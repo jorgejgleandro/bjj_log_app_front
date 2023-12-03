@@ -5,11 +5,11 @@ li {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    background-color: rgb(118, 149, 168);
+    background-color: rgb(163, 186, 200);
 }
 
 header {
-    background-color: rgb(118, 149, 168);
+    background-color: rgb(163, 186, 200);
     text-align: center;
     position: relative;
     width: 100%;
@@ -26,18 +26,17 @@ header {
 }
 
 .banner {
-    height: 300px;
+    height: 200px;
     overflow: hidden;
+    background-image: url('./img/positions.jpg');
+    background-size: 200px 200px;
 }
 
-.banner img {
-    margin: 0px 0px 0px 0px;
-    width: 100%;
-    background-repeat: repeat-y;
-}
+
+
 
 .newItem {
-    background-color: rgb(118, 149, 168);
+    background-color: rgb(163, 186, 200);
     padding: 30px 40px;
     color: white;
     display: flex;
