@@ -54,7 +54,12 @@ const postItem = async (inputTecnica, inputDescricao, inputNivel, inputVideo) =>
     method: 'post',
     body: formData
   })
-    .then((response) => response.json())
+    .then((response) => {
+      if (response.status === 200) {
+        insertList(inputTecnica, inputDescricao, inputNivel, inputVideo);
+        alert("Tecnica adicionada!");
+      }
+    })
     .catch((error) => {
       console.error('Error:', error);
     });
@@ -135,9 +140,7 @@ const newItem = () => {
   if (inputTecnica === '') {
     alert("Escreva o nome de uma tecnica!");
   } else {
-    insertList(inputTecnica, inputDescricao, inputNivel, inputVideo)
-    postItem(inputTecnica, inputDescricao, inputNivel, inputVideo)
-    alert("Tecnica adicionada!")
+    postItem(inputTecnica, inputDescricao, inputNivel, inputVideo);
   }
 }
 
