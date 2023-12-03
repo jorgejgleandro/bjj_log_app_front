@@ -119,6 +119,15 @@ const deleteItem = (item) => {
     });
 }
 
+function getNivelValue(newNivel) {
+  var radio_btns = document.getElementsByName(newNivel), i;
+  for (i = 0; i < radio_btns.length; i++)
+    if (radio_btns[i].checked)
+      return radio_btns[i].value;
+  return null;
+}
+
+
 /*
   --------------------------------------------------------------------------------------
   Função para adicionar um novo item com nome, descricao, nivel e video 
@@ -127,7 +136,7 @@ const deleteItem = (item) => {
 const newItem = () => {
   let inputTecnica = document.getElementById("newTecnica").value;
   let inputDescricao = document.getElementById("newDescricao").value;
-  let inputNivel = document.getElementById("newNivel").value;
+  let inputNivel = getNivelValue("newNivel");
   let inputVideo = document.getElementById("newVideo").value;
 
   console.log(`NEWITEM`);
@@ -161,7 +170,7 @@ const insertList = (nomeTecnica, descricao, nivel, video) => {
   insertButton(row.insertCell(-1))
   document.getElementById("newTecnica").value = "";
   document.getElementById("newDescricao").value = "";
-  document.getElementById("newNivel").value = "";
+  document.getElementsByName("newNivel")[0].checked = true;
   document.getElementById("newVideo").value = "";
 
   removeElement()

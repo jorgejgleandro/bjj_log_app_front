@@ -50,26 +50,38 @@ header {
     clear: both;
 }
 
-#newInput {
+#newTecnica {
+    margin: 0px;
+    border: 1px solid rgb(35, 32, 24);
+    width: 20%;
+    padding: 5px;
+    font-size: 16px;
+}
+
+#newDescricao {
     margin: 0;
     border: 1px solid rgb(35, 32, 24);
     width: 25%;
+    padding: 5px;
+    font-size: 16px;
+}
+
+input[name="newNivel"] {
+    color: rgb(24, 24, 122);
+}
+
+#newNivel {
+    margin: 0;
+    border: 1px solid rgb(35, 32, 24);
+    width: 50%;
     padding: 10px;
     font-size: 16px;
 }
 
-#newQuantity {
+#newVideo {
     margin: 0;
     border: 1px solid rgb(35, 32, 24);
-    width: 8%;
-    padding: 10px;
-    font-size: 16px;
-}
-
-#newPrice {
-    margin: 0;
-    border: 1px solid rgb(35, 32, 24);
-    width: 5%;
+    width: 10%;
     padding: 10px;
     font-size: 16px;
 }
@@ -118,7 +130,7 @@ td {
 
 table {
     background-color: white;
-    width: 50%;
+    width: 80%;
 }
 
 tr:nth-child(odd) {
