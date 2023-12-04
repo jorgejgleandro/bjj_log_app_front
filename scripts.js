@@ -130,7 +130,7 @@ function getNivelValue(newNivel) {
 
 /*
   --------------------------------------------------------------------------------------
-  Função para adicionar um novo item com nome, descricao, nivel e video 
+  Função para adicionar uma nova tecnica com nome, descricao, nivel e video 
   --------------------------------------------------------------------------------------
 */
 const newItem = () => {
@@ -152,6 +152,7 @@ const newItem = () => {
     postItem(inputTecnica, inputDescricao, inputNivel, inputVideo);
   }
 }
+
 
 /*
   --------------------------------------------------------------------------------------
@@ -175,3 +176,38 @@ const insertList = (nomeTecnica, descricao, nivel, video) => {
 
   removeElement()
 }
+
+const setTab = (tab_content, tab_button) => {
+
+  const tabcontents = document.getElementsByClassName("tabcontent");
+  for (let i = 0; i < tabcontents.length; i++) {
+    tabcontents[i].style.display = "none";
+  }
+
+  const tablinks = document.getElementsByClassName("tablinks");
+  for (let i = 0; i < tablinks.length; i++) {
+    tablinks[i].classList.remove("active");
+  }
+
+
+  tab_content.style.display = "block";
+  tab_button.classList.add("active");
+
+}
+
+const newTecnicaTab = document.getElementById("newTecnica_tab");
+const newTecnicaContent = document.getElementById("newTecnica_content");
+
+const newAlunoTab = document.getElementById("newAluno_tab");
+const newAlunoContent = document.getElementById("newAluno_content");
+
+
+newTecnicaTab.addEventListener("click", () => {
+  setTab(newTecnicaContent, newTecnicaTab);
+});
+
+newAlunoTab.addEventListener("click", () => {
+  setTab(newAlunoContent, newAlunoTab);
+});
+
+newTecnicaTab.click();

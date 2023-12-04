@@ -33,12 +33,66 @@ header {
 }
 
 
+.tab {
+    overflow: hidden;
+    border: 1px solid #ccc;
+    background-color: rgb(24, 24, 122);
+}
+
+.tab button {
+    background-color: inherit;
+    color: white;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+    font-size: 25px;
+}
+
+.tab button:hover {
+    background-color: #ddd;
+}
+
+.tab button.active {
+    background-color: #ccc;
+    color: rgb(24, 24, 122);
+}
+
+.tab-content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 0px 20px;
+}
+
+.tabcontent {
+    display: none;
+    padding: 1px 1px;
+    border: 1px solid #ccc;
+    border-top: none;
+    flex-basis: 48%;
+    margin-bottom: 20px;
+    background-color: rgba(255, 255, 255, 0.8);
+}
+
+@media screen and (max-width: 600px) {
+    .tab button {
+        float: none;
+        width: 100%;
+    }
+
+    .tabcontent {
+        flex-direction: column;
+    }
+}
 
 
 .newItem {
     background-color: rgb(163, 186, 200);
-    padding: 30px 40px;
-    color: white;
+    padding: 5px 0px;
+    color: rgb(24, 24, 122);
     display: flex;
     justify-content: center;
 }
