@@ -3,14 +3,16 @@
   Função para obter a lista existente do servidor via requisição GET
   --------------------------------------------------------------------------------------
 */
-const getList = async () => {
-  let url = 'http://127.0.0.1:5000/tecnicas';
+const getList = async (route_name, myTable) => {
+  let url = 'http://127.0.0.1:5000/' + route_name;
   fetch(url, {
     method: 'get',
   })
     .then((response) => response.json())
     .then((data) => {
-      data.tecnicas.forEach(item => insertList(item.nome, item.descricao, item.nivel, item.video))
+      //console.log(`data: ${JSON.stringify(data['tecnicas'])}`);
+      //data.tecnicas.forEach(item => insertList(item.nome, item.descricao, item.nivel, item.video))
+      data[route_name].forEach(item => insertList(item, myTable, route_name))
     })
     .catch((error) => {
       console.error('Error:', error);
@@ -22,7 +24,9 @@ const getList = async () => {
   Chamada da função para carregamento inicial dos dados
   --------------------------------------------------------------------------------------
 */
-getList()
+getList('tecnicas', 'myTableTecnica');
+
+getList('alunos', 'myTableAlunos');
 
 
 /*
@@ -30,33 +34,27 @@ getList()
   Função para colocar um item na lista do servidor via requisição POST
   --------------------------------------------------------------------------------------
 */
-const postItem = async (inputTecnica, inputDescricao, inputNivel, inputVideo) => {
-  console.log(`POSTITEM`);
-  console.log(`inputTecnica: ${inputTecnica}`);
-  console.log(`inputDescricao: ${inputDescricao}`);
-  console.log(`inputNivel: ${inputNivel}`);
-  console.log(`inputVideo: ${inputVideo}`);
 
+const postItem = async (item_obj, route_name, myTable) => {
+
+  item_keys = Object.keys(item_obj);
+  item_values = Object.values(item_obj);
 
   const formData = new FormData();
-  formData.append('nome', inputTecnica);
-  formData.append('descricao', inputDescricao);
-  formData.append('nivel', inputNivel);
-  formData.append('video', inputVideo);
 
-  // List key/value pairs
-  for (let [name, value] of formData) {
-    console.log(`${name} = ${value}`); // key1 = value1, then key2 = value2
+  for (let [key, value] of Object.entries(item_obj)) {
+    console.log(`key: ${key} value: ${value}`);
+    formData.append(key, value);
   }
 
-  let url = 'http://127.0.0.1:5000/tecnica';
+  let url = 'http://127.0.0.1:5000/' + route_name;
   fetch(url, {
     method: 'post',
     body: formData
   })
     .then((response) => {
       if (response.status === 200) {
-        insertList(inputTecnica, inputDescricao, inputNivel, inputVideo);
+        insertList(item_obj, myTable, route_name);
         alert("Tecnica adicionada!");
       }
     })
@@ -85,17 +83,17 @@ const insertButton = (parent) => {
   Função para remover um item da lista de acordo com o click no botão close
   --------------------------------------------------------------------------------------
 */
-const removeElement = () => {
+const removeElement = (route_name) => {
   let close = document.getElementsByClassName("close");
-  // var table = document.getElementById('myTable');
   let i;
+
   for (i = 0; i < close.length; i++) {
     close[i].onclick = function () {
       let div = this.parentElement.parentElement;
       const nomeItem = div.getElementsByTagName('td')[0].innerHTML
       if (confirm("Você tem certeza?")) {
         div.remove()
-        deleteItem(nomeItem)
+        deleteItem(route_name, nomeItem)
         alert("Removido!")
       }
     }
@@ -107,9 +105,10 @@ const removeElement = () => {
   Função para remover um item da lista do servidor via requisição DELETE
   --------------------------------------------------------------------------------------
 */
-const deleteItem = (item) => {
+const deleteItem = (route_name, item) => {
   console.log(item)
-  let url = 'http://127.0.0.1:5000/tecnica?nome=' + item;
+
+  let url = 'http://127.0.0.1:5000/' + route_name + '?nome=' + item;
   fetch(url, {
     method: 'delete'
   })
@@ -119,7 +118,7 @@ const deleteItem = (item) => {
     });
 }
 
-function getNivelValue(newNivel) {
+const getNivelValue = (newNivel) => {
   var radio_btns = document.getElementsByName(newNivel), i;
   for (i = 0; i < radio_btns.length; i++)
     if (radio_btns[i].checked)
@@ -127,30 +126,70 @@ function getNivelValue(newNivel) {
   return null;
 }
 
+const getItemObj = (route_name, ...args) => {
+  if (route_name === 'tecnica') {
+    return ({
+      'nome': document.getElementById(args[0]).value,
+      'descricao': document.getElementById(args[1]).value,
+      'nivel': getNivelValue(args[2]),
+      'video': document.getElementById(args[3]).value
+    });
+  } else if (route_name === 'aluno') {
+    return ({
+      'nome': document.getElementById(args[0]).value,
+      'data_de_nascimento': document.getElementById(args[1]).value,
+      'data_de_inicio': document.getElementById(args[2]).value,
+      'graduacao': document.getElementById(args[3]).value
+    });
+
+  } else {
+    console.log('Unknown item type!')
+  }
+
+}
+
 
 /*
   --------------------------------------------------------------------------------------
-  Função para adicionar uma nova tecnica com nome, descricao, nivel e video 
+  Função para adicionar um novo item em uma tabela especifica
   --------------------------------------------------------------------------------------
 */
-const newItem = () => {
-  let inputTecnica = document.getElementById("newTecnica").value;
-  let inputDescricao = document.getElementById("newDescricao").value;
-  let inputNivel = getNivelValue("newNivel");
-  let inputVideo = document.getElementById("newVideo").value;
+const newItem = (route_name, myTable, ...args) => {
+  console.log(`In newItem. route_name: ${route_name} myTable:${myTable} args:${args}`)
 
-  console.log(`NEWITEM`);
-  console.log(`inputTecnica: ${inputTecnica}`);
-  console.log(`inputDescricao: ${inputDescricao}`);
-  console.log(`inputNivel: ${inputNivel}`);
-  console.log(`inputVideo: ${inputVideo}`);
+  const item_obj = getItemObj(route_name, ...args);
 
+  console.log(`In newItem. item_obj: ${JSON.stringify(item_obj)}`)
 
-  if (inputTecnica === '') {
-    alert("Escreva o nome de uma tecnica!");
+  if (args[0] === '') {
+    alert("Escreva o nome da entrada!");
   } else {
-    postItem(inputTecnica, inputDescricao, inputNivel, inputVideo);
+
+    postItem(item_obj, route_name, myTable)
   }
+}
+
+/*
+  --------------------------------------------------------------------------------------
+  Função para limpar campos de entrada no formulário
+  --------------------------------------------------------------------------------------
+*/
+
+const clearInputFields = (myTable) => {
+
+  console.log(`myTable: ${myTable}`)
+
+  if (myTable === 'myTableTecnica') {
+    document.getElementById("newTecnica").value = "";
+    document.getElementById("newDescricao").value = "";
+    document.getElementsByName("newNivel")[0].checked = true;
+    document.getElementById("newVideo").value = "";
+  } else if (myTable === 'myTableAluno') {
+
+  } else {
+    console.log('Unknow item type');
+  }
+
 }
 
 
@@ -159,22 +198,22 @@ const newItem = () => {
   Função para inserir items na lista apresentada
   --------------------------------------------------------------------------------------
 */
-const insertList = (nomeTecnica, descricao, nivel, video) => {
-  var item = [nomeTecnica, descricao, nivel, video]
-  var table = document.getElementById('myTable');
+
+const insertList = (item_obj, myTable, route_name) => {
+  var item = Object.values(item_obj);
+
+  var table = document.getElementById(myTable);
   var row = table.insertRow();
 
   for (var i = 0; i < item.length; i++) {
     var cel = row.insertCell(i);
     cel.textContent = item[i];
   }
-  insertButton(row.insertCell(-1))
-  document.getElementById("newTecnica").value = "";
-  document.getElementById("newDescricao").value = "";
-  document.getElementsByName("newNivel")[0].checked = true;
-  document.getElementById("newVideo").value = "";
+  insertButton(row.insertCell(-1));
 
-  removeElement()
+  clearInputFields(myTable);
+
+  removeElement(route_name);
 }
 
 const setTab = (tab_content, tab_button) => {

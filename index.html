@@ -40,13 +40,14 @@
             <input type="radio" id="avancado" name="newNivel" value="Avançado">
             <label for="avancado">Avançado</label>
             <input type="text" id="newVideo" placeholder="Video:">
-            <span onclick="newItem()" class="addBtn">Adicionar</span>
+            <span onclick="newItem('tecnica', 'myTableTecnica', 'newTecnica', 'newDescricao', 'newNivel', 'newVideo')"
+                class="addBtn">Adicionar</span>
         </section>
 
         <!-- Tabela com items existentes -->
         <p>Lista de técnicas adicionadas.</p>
         <section class="items">
-            <table id="myTable">
+            <table id="myTableTecnica">
                 <tr>
                     <th>Nome</th>
                     <th>Descrição</th>
@@ -65,6 +66,7 @@
             <input type="text" id="newAluno" placeholder="Adicionar nome do aluno:">
             <input type="text" id="newDataNascimento" placeholder="Data de Nascimento:">
             <input type="text" id="newDataInicio" placeholder="Data de Inicio:">
+            <label for="newGraduacao">Graduação:</label>
             <select name="faixas" id="newGraduacao">
                 <option value="Branca">Branca</option>
                 <option value="Azul">Azul</option>
@@ -72,13 +74,15 @@
                 <option value="Marrom">Marrom</option>
                 <option value="Preta">Preta</option>
             </select>
-            <span onclick="newItem()" class="addBtn">Adicionar</span>
+            <span
+                onclick="newItem('aluno', 'myTableAluno', 'newAluno', 'newDataNascimento', 'newDataInicio', 'newGraduacao')"
+                class="addBtn">Adicionar</span>
         </section>
 
         <!-- Tabela com items existentes -->
         <p>Lista de Alunos cadastrados.</p>
         <section class="items">
-            <table id="myTable">
+            <table id="myTableAluno">
                 <tr>
                     <th>Nome</th>
                     <th>Data de Nascimento</th>
