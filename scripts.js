@@ -1,6 +1,6 @@
 /*
   --------------------------------------------------------------------------------------
-  Função para obter a lista existente do servidor via requisição GET
+  Função genérica para obter uma lista existente do servidor via requisição GET
   --------------------------------------------------------------------------------------
 */
 const getList = async (route_name, myTable) => {
@@ -10,8 +10,6 @@ const getList = async (route_name, myTable) => {
   })
     .then((response) => response.json())
     .then((data) => {
-      //console.log(`data: ${JSON.stringify(data['tecnicas'])}`);
-      //data.tecnicas.forEach(item => insertList(item.nome, item.descricao, item.nivel, item.video))
       data[route_name].forEach(item => insertList(item, myTable, route_name))
     })
     .catch((error) => {
@@ -21,7 +19,7 @@ const getList = async (route_name, myTable) => {
 
 /*
   --------------------------------------------------------------------------------------
-  Chamada da função para carregamento inicial dos dados
+  Chamada de funções genéricas para carregamento inicial dos dados e geração da lista
   --------------------------------------------------------------------------------------
 */
 getList('tecnicas', 'myTableTecnica');
@@ -31,7 +29,7 @@ getList('alunos', 'myTableAlunos');
 
 /*
   --------------------------------------------------------------------------------------
-  Função para colocar um item na lista do servidor via requisição POST
+  Função genérica para colocar um item numa lista do servidor via requisição POST
   --------------------------------------------------------------------------------------
 */
 
@@ -80,7 +78,7 @@ const insertButton = (parent) => {
 
 /*
   --------------------------------------------------------------------------------------
-  Função para remover um item da lista de acordo com o click no botão close
+  Função genérica para remover um item de uma lista de acordo com o click no botão close
   --------------------------------------------------------------------------------------
 */
 const removeElement = (route_name) => {
@@ -102,7 +100,7 @@ const removeElement = (route_name) => {
 
 /*
   --------------------------------------------------------------------------------------
-  Função para remover um item da lista do servidor via requisição DELETE
+  Função genérica para remover um item de uma lista do servidor via requisição DELETE
   --------------------------------------------------------------------------------------
 */
 const deleteItem = (route_name, item) => {
@@ -118,6 +116,11 @@ const deleteItem = (route_name, item) => {
     });
 }
 
+/*
+  --------------------------------------------------------------------------------------
+  Função para obter o valor do Nivel selecionado pelo usuario dentre os botões de Radio
+  --------------------------------------------------------------------------------------
+*/
 const getNivelValue = (newNivel) => {
   var radio_btns = document.getElementsByName(newNivel), i;
   for (i = 0; i < radio_btns.length; i++)
@@ -126,6 +129,12 @@ const getNivelValue = (newNivel) => {
   return null;
 }
 
+/*
+  --------------------------------------------------------------------------------------
+  Função para construir e devolver um objeto a partir dos valores fornecidos pelo usuário no form do frontend,
+  para uma determinada rota
+  --------------------------------------------------------------------------------------
+*/
 const getItemObj = (route_name, ...args) => {
   if (route_name === 'tecnica') {
     return ({
@@ -145,13 +154,12 @@ const getItemObj = (route_name, ...args) => {
   } else {
     console.log('Unknown item type!')
   }
-
 }
 
 
 /*
   --------------------------------------------------------------------------------------
-  Função para adicionar um novo item em uma tabela especifica
+  Função genérica para adicionar um novo item em uma tabela especifica, conforme rota
   --------------------------------------------------------------------------------------
 */
 const newItem = (route_name, myTable, ...args) => {
@@ -170,11 +178,10 @@ const newItem = (route_name, myTable, ...args) => {
 }
 
 /*
-  --------------------------------------------------------------------------------------
-  Função para limpar campos de entrada no formulário
-  --------------------------------------------------------------------------------------
+  ----------------------------------------------------------------------------------------------
+  Função genérica para limpar campos de entrada no formulário referente a uma tabela especifica
+  ----------------------------------------------------------------------------------------------
 */
-
 const clearInputFields = (myTable) => {
 
   console.log(`myTable: ${myTable}`)
@@ -185,9 +192,13 @@ const clearInputFields = (myTable) => {
     document.getElementsByName("newNivel")[0].checked = true;
     document.getElementById("newVideo").value = "";
   } else if (myTable === 'myTableAluno') {
+    document.getElementById("newAluno").value = "";
+    document.getElementById("newDataNascimento").value = "";
+    document.getElementsByName("newDataInicio").value = "";
+    document.getElementById("newGraduacao").value = "";
 
   } else {
-    console.log('Unknow item type');
+    console.log('Unknown item type');
   }
 
 }
@@ -195,10 +206,9 @@ const clearInputFields = (myTable) => {
 
 /*
   --------------------------------------------------------------------------------------
-  Função para inserir items na lista apresentada
+  Função genérica para inserir itens na lista específica apresentada
   --------------------------------------------------------------------------------------
 */
-
 const insertList = (item_obj, myTable, route_name) => {
   var item = Object.values(item_obj);
 
@@ -216,6 +226,12 @@ const insertList = (item_obj, myTable, route_name) => {
   removeElement(route_name);
 }
 
+
+/*
+  --------------------------------------------------------------------------------------
+  Função para selecionar aba ativa no frontend da aplicação
+  --------------------------------------------------------------------------------------
+*/
 const setTab = (tab_content, tab_button) => {
 
   const tabcontents = document.getElementsByClassName("tabcontent");
@@ -233,6 +249,13 @@ const setTab = (tab_content, tab_button) => {
   tab_button.classList.add("active");
 
 }
+
+
+/*
+  --------------------------------------------------------------------------------------
+  Associando escutadores para o evento de click sobre o botão associado a cada aba
+  --------------------------------------------------------------------------------------
+*/
 
 const newTecnicaTab = document.getElementById("newTecnica_tab");
 const newTecnicaContent = document.getElementById("newTecnica_content");
