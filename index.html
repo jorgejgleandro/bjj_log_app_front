@@ -8,7 +8,7 @@
 
     <link rel="stylesheet" href="styles.css">
 
-    <title>BJJ Logging</title>
+    <title>BJJ Training Log</title>
 </head>
 
 <body>
@@ -20,6 +20,7 @@
         <div class="banner"></div>
     </header>
 
+    <!-- Abas para cadastro de entidades Tecnica e Aluno -->
     <div class="tab">
         <button class="tablinks active" id="newTecnica_tab">Adicione Nova
             Técnica</button>
@@ -27,9 +28,7 @@
     </div>
 
     <div class="tabcontent" id="newTecnica_content">
-
-        <!-- Opções para adicionar um novo item -->
-
+        <!-- Opções para adicionar uma nova Tecnica -->
         <section class="newItem">
             <input type="text" id="newTecnica" placeholder="Adicionar nova tecnica:">
             <input type="text" id="newDescricao" placeholder="Descricao:">
@@ -44,7 +43,7 @@
                 class="addBtn">Adicionar</span>
         </section>
 
-        <!-- Tabela com items existentes -->
+        <!-- Tabela com tecnicas registradas -->
         <p>Lista de técnicas adicionadas.</p>
         <section class="items">
             <table id="myTableTecnica">
@@ -62,6 +61,7 @@
     </div>
 
     <div class="tabcontent" id="newAluno_content">
+         <!-- Opções para adicionar um novo Aluno -->
         <section class="newItem">
             <input type="text" id="newAluno" placeholder="Adicionar nome do aluno:">
             <input type="text" id="newDataNascimento" placeholder="Data de Nascimento:">
@@ -79,7 +79,7 @@
                 class="addBtn">Adicionar</span>
         </section>
 
-        <!-- Tabela com items existentes -->
+        <!-- Tabela com alunos cadastrados -->
         <p>Lista de Alunos cadastrados.</p>
         <section class="items">
             <table id="myTableAluno">
@@ -93,9 +93,6 @@
                 </tr>
             </table>
         </section>
-
-
-
 
     </div>
 
