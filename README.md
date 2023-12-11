@@ -17,6 +17,18 @@ Apesar do Jiu-Jitsu Brasileiro (*Brazilian Jiu Jitsu*) ter sido aqui eleito como
 ---
 ## Execução
 
-Vale salientar que, para executar a aplicação com esse *frontend*, é necessário que o respectivo *backend* esteja em execução. Feito isso, basta realizar o **download** desse projeto e abrir o arquivo *index.html* no seu browser.
+Vale salientar que, para executar a aplicação com esse *frontend*, é necessário que o respectivo *backend* esteja em execução.
+
+Faça uma cópia desse repositório para sua máquina local, preferencialmente com o comando abaixo.
+```
+git clone git@github.com:jorgejgleandro/bjj_log_app_front.git
+
+Acesse a **branch** *master* do repositório:
+
+```
+git checkout master
+```
+
+Feito isso, basta realizar o **download** desse projeto e abrir o arquivo *index.html* no seu browser.
 
 Para obter a implementação do **API**, dirija-se ao repositório do [*backend*](https://github.com/jorgejgleandro/bjj_log_app_api) e siga aquelas instruções.
