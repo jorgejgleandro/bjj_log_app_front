@@ -22,6 +22,7 @@ Vale salientar que, para executar a aplicação com esse *frontend*, é necessá
 Faça uma cópia desse repositório para sua máquina local, preferencialmente com o comando abaixo.
 ```
 git clone git@github.com:jorgejgleandro/bjj_log_app_front.git
+```
 
 Acesse a **branch** *master* do repositório:
 
